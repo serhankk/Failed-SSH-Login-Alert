@@ -1,0 +1,18 @@
+# copy this file to the
+# /etc/systemd/system directory
+
+[Unit]
+Description=Alert failed SSH attempts!
+After=network.target
+StartLimitIntervalSec=0[Service]
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/bin/bash /the/scripts/path/failed_ssh_attempt.sh
+ExecStop=/usr/bin/kill $MAINPID
+
+[Install]
+WantedBy=multi-user.target
